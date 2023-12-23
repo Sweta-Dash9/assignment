@@ -1,0 +1,41 @@
+public class DuplicateZeros {
+    public static void duplicateZeros(int[] arr) {
+        int length = arr.length;
+        int zerosCount = 0;
+        // Count the number of zeros in the array
+        for (int num : arr) {
+            if (num == 0) {
+                zerosCount++;
+            }
+        }
+        // Iterate from the end and shift elements to the right
+        for (int i = length - 1; i >= 0; i--) {
+            if (arr[i] == 0) {
+                // If the current element is zero, duplicate it and shift remaining elements
+                if (i + zerosCount < length) {
+                    arr[i + zerosCount] = 0;
+                }
+                zerosCount--;
+                if (i + zerosCount < length) {
+                    arr[i + zerosCount] = 0;
+                }
+            } else {
+                // Shift non-zero elements to the right
+                if (i + zerosCount < length) {
+                    arr[i + zerosCount] = arr[i];
+                }
+            }
+        }
+    }
+    public static void main(String[] args) {
+        // Example array
+        int[] arr = {1, 0, 2, 3, 0, 4, 5, 0};
+        // Call the function to duplicate zeros
+        duplicateZeros(arr);
+        // Print the modified array
+        System.out.println("Modified Array:");
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+    }
+}

@@ -1,0 +1,36 @@
+public class SortColors {
+    public static void sortColors(int[] nums) {
+        int low = 0; // Pointer for the red color (0)
+        int high = nums.length - 1; // Pointer for the blue color (2)
+        int current = 0; // Current pointer for traversal
+        while (current <= high) {
+            if (nums[current] == 0) {
+                // Swap with the red pointer
+                swap(nums, current, low);
+                current++;
+                low++;
+            } else if (nums[current] == 2) {
+                // Swap with the blue pointer
+                swap(nums, current, high);
+                high--;
+            } else {
+                // Move forward for white color (1)
+                current++;
+            }
+        }
+    }
+    private static void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+    public static void main(String[] args) {
+        int[] nums = {2,0,1};
+        sortColors(nums);
+        // Print the sorted array
+        System.out.println("Sorted Colors:");
+        for (int num : nums) {
+            System.out.print(num + " ");
+        }
+    }
+}
